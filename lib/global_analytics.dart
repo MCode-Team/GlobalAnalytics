@@ -32,7 +32,7 @@ class GlobalAnalytics {
       {String name = "pageview",
       String referrer = "",
       String page = "",
-      Map<String, String> props = const {}}) async {
+      Map<String, String> parameters = const {}}) async {
     if (!enabled) {
       return 0;
     }
@@ -78,7 +78,7 @@ class GlobalAnalytics {
         "url": page,
         "referrer": referrer,
         "screenPage": screenPage,
-        "props": props,
+        "parameters": parameters,
       };
       request.write(json.encode(body));
       final HttpClientResponse response = await request.close();
