@@ -13,19 +13,17 @@ class GlobalAnalytics {
   /// The url of your plausible server e.g. https://analytics.api-globalhouse.com
   String serverUrl = "https://analytics.api-globalhouse.com";
   String apiKey = "";
-  String userAgent;
-  String domain;
+  String userID = "";
+  String sessionID = "";
+  String userAgent = "";
+  String domain = "";
   String screenPage;
-  String userID;
-  String sessionID;
+
   bool enabled = true;
 
   /// Constructor
-  GlobalAnalytics(this.serverUrl, this.domain, this.apiKey,
-      {this.userAgent = "",
-      this.screenPage = "",
-      this.userID = "",
-      this.sessionID = ""});
+  GlobalAnalytics(this.serverUrl, this.domain, this.apiKey, this.userID,
+      this.sessionID, this.userAgent, this.screenPage);
 
   /// Post event to plausible
   Future<int> globalEvent(
