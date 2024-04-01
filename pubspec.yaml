@@ -1,7 +1,7 @@
 name: global_analytics
 description: A new Flutter package GlobalHouse Aalytics.
 version: 0.0.3
-homepage: https://github.com/brasizza/sunmi_printer/
+homepage: https://github.com/MCode-Team/GlobalAnalytics/
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
