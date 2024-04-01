@@ -17,13 +17,12 @@ class GlobalAnalytics {
   String sessionID = "";
   String userAgent = "";
   String domain = "";
-  String screenPage;
 
   bool enabled = true;
 
   /// Constructor
   GlobalAnalytics(this.serverUrl, this.domain, this.apiKey, this.userID,
-      this.sessionID, this.userAgent, this.screenPage);
+      this.sessionID, this.userAgent);
 
   /// Post event to plausible
   Future<int> globalEvent(
@@ -75,7 +74,6 @@ class GlobalAnalytics {
         "name": name,
         "url": page,
         "referrer": referrer,
-        "screenPage": screenPage,
         "parameters": parameters,
       };
       request.write(json.encode(body));
