@@ -114,7 +114,7 @@ class GlobalAnalytics {
 
       HttpClient client = HttpClient();
       HttpClientRequest request =
-          await client.getUrl(Uri.parse('$serverUrl/api/screen-view'));
+          await client.postUrl(Uri.parse('$serverUrl/api/screen-view'));
       request.headers.set('Api-Key', apiKey);
       request.headers.set('User-Agent', userAgent);
       request.headers.set('User-ID', userID);
@@ -123,6 +123,8 @@ class GlobalAnalytics {
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       request.headers.set('X-Forwarded-For', '127.0.0.1');
 
+      Object body = {"screenName": screenName};
+      request.write(json.encode(body));
       final HttpClientResponse response = await request.close();
       client.close();
       return response.statusCode;
