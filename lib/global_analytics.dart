@@ -24,12 +24,60 @@ class GlobalAnalytics {
   GlobalAnalytics(this.serverUrl, this.domain, this.apiKey, this.userID,
       this.sessionID, this.userAgent);
 
+Future<int> globalUsers(
+      {String? branch,
+      dynamic location = const []}) async {
+    if (apiKey == "") {
+      return 0;
+    }
+    // Post-edit parameters
+    int lastCharIndex = serverUrl.length - 1;
+    if (serverUrl.toString()[lastCharIndex] == '/') {
+      // Remove trailing slash '/'
+      serverUrl = serverUrl.substring(0, lastCharIndex);
+    }
+    // Get and set device infos
+    String version = Platform.operatingSystemVersion.replaceAll('"', '');
+
+    if (userAgent == "") {
+      userAgent = "Mozilla/5.0 ($version; rv:53.0) Gecko/20100101 Chrome/53.0";
+    }
+
+    try {
+      String? external = await RGetIp.externalIP;
+      String? network = await RGetIp.networkType;
+
+      HttpClient client = HttpClient();
+      HttpClientRequest request =
+          await client.postUrl(Uri.parse('$serverUrl/api/screen-view'));
+      request.headers.set('Api-Key', apiKey);
+      request.headers.set('User-Agent', userAgent);
+      request.headers.set('User-ID', userID);
+      request.headers.set('Session-ID', sessionID);
+      request.headers.set('User-IP', '$external,$network');
+      request.headers.set('Content-Type', 'application/json; charset=utf-8');
+      request.headers.set('X-Forwarded-For', '127.0.0.1');
+
+      Object body = {"branch": branch, "location": location};
+      request.write(json.encode(body));
+      final HttpClientResponse response = await request.close();
+      client.close();
+      return response.statusCode;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+
+    return 1;
+  }
+
   /// Post event to plausible
   Future<int> globalEvent(
       {String name = "pageview",
       String referrer = "",
       String page = "",
-      Map<String, String> parameters = const {}}) async {
+      dynamic parameters = const {}}) async {
     if (!enabled) {
       return 0;
     }
@@ -91,7 +139,7 @@ class GlobalAnalytics {
 
   Future<int> globalScreen(
       {required String? screenName,
-      String screenClassOverride = 'Flutter'}) async {
+      dynamic parameters = const {}}) async {
     if (apiKey == "") {
       return 0;
     }
@@ -123,7 +171,7 @@ class GlobalAnalytics {
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       request.headers.set('X-Forwarded-For', '127.0.0.1');
 
-      Object body = {"screenName": screenName};
+      Object body = {"screenName": screenName, "parameters": parameters};
       request.write(json.encode(body));
       final HttpClientResponse response = await request.close();
       client.close();
