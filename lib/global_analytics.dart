@@ -56,7 +56,7 @@ class GlobalAnalytics {
       request.headers.set('Session-ID', sessionID);
       request.headers.set('User-IP', '$external,$network');
       request.headers.set('User-Branch', userBranch);
-      request.headers.set('User-LatLong', userLatLong);
+      request.headers.set('User-Location', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       // request.headers.set('X-Forwarded-For', '127.0.0.1');
 
@@ -117,7 +117,7 @@ class GlobalAnalytics {
       request.headers.set('Session-ID', sessionID);
       request.headers.set('User-IP', '$external,$network');
       request.headers.set('User-Branch', userBranch);
-      request.headers.set('User-LatLong', userLatLong);
+      request.headers.set('User-Location', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       // request.headers.set('X-Forwarded-For', '127.0.0.1');
 
@@ -172,7 +172,7 @@ class GlobalAnalytics {
       request.headers.set('Session-ID', sessionID);
       request.headers.set('User-IP', '$external,$network');
       request.headers.set('User-Branch', userBranch);
-      request.headers.set('User-LatLong', userLatLong);
+      request.headers.set('User-Location', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       // request.headers.set('X-Forwarded-For', '127.0.0.1');
 
