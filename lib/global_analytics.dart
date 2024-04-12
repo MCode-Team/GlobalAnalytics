@@ -40,7 +40,7 @@ class GlobalAnalytics {
     String version = Platform.operatingSystemVersion.replaceAll('"', '');
 
     if (userAgent == "") {
-      userAgent = "Mozilla/5.0 ($version; rv:53.0) Gecko/20100101 Chrome/53.0";
+      userAgent = version;
     }
 
     try {
@@ -100,7 +100,7 @@ class GlobalAnalytics {
     String version = Platform.operatingSystemVersion.replaceAll('"', '');
 
     if (userAgent == "") {
-      userAgent = "Mozilla/5.0 ($version; rv:53.0) Gecko/20100101 Chrome/53.0";
+      userAgent = version;
     }
 
     // Http Post request see https://plausible.io/docs/events-api
@@ -156,7 +156,7 @@ class GlobalAnalytics {
     String version = Platform.operatingSystemVersion.replaceAll('"', '');
 
     if (userAgent == "") {
-      userAgent = "Mozilla/5.0 ($version; rv:53.0) Gecko/20100101 Chrome/53.0";
+      userAgent = version;
     }
 
     try {
