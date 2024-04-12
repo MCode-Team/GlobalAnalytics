@@ -17,16 +17,16 @@ class GlobalAnalytics {
   String sessionID = "";
   String userAgent = "";
   String domain = "";
+  String userBranch = "";
+  String userLatLong = "";
 
   bool enabled = true;
 
   /// Constructor
   GlobalAnalytics(this.serverUrl, this.domain, this.apiKey, this.userID,
-      this.sessionID, this.userAgent);
+      this.sessionID, this.userAgent, this.userBranch, this.userLatLong);
 
-Future<int> globalUsers(
-      {String? branch,
-      dynamic location = const []}) async {
+  Future<int> globalUsers({String? branch, dynamic location = const []}) async {
     if (apiKey == "") {
       return 0;
     }
@@ -55,6 +55,8 @@ Future<int> globalUsers(
       request.headers.set('User-ID', userID);
       request.headers.set('Session-ID', sessionID);
       request.headers.set('User-IP', '$external,$network');
+      request.headers.set('User-Branch', userBranch);
+      request.headers.set('User-LatLong', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       // request.headers.set('X-Forwarded-For', '127.0.0.1');
 
@@ -114,6 +116,8 @@ Future<int> globalUsers(
       request.headers.set('User-ID', userID);
       request.headers.set('Session-ID', sessionID);
       request.headers.set('User-IP', '$external,$network');
+      request.headers.set('User-Branch', userBranch);
+      request.headers.set('User-LatLong', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       // request.headers.set('X-Forwarded-For', '127.0.0.1');
 
@@ -138,8 +142,7 @@ Future<int> globalUsers(
   }
 
   Future<int> globalScreen(
-      {required String? screenName,
-      dynamic parameters = const {}}) async {
+      {required String? screenName, dynamic parameters = const {}}) async {
     if (apiKey == "") {
       return 0;
     }
@@ -168,6 +171,8 @@ Future<int> globalUsers(
       request.headers.set('User-ID', userID);
       request.headers.set('Session-ID', sessionID);
       request.headers.set('User-IP', '$external,$network');
+      request.headers.set('User-Branch', userBranch);
+      request.headers.set('User-LatLong', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
       // request.headers.set('X-Forwarded-For', '127.0.0.1');
 
