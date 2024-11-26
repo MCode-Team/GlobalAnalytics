@@ -6,7 +6,9 @@ import 'package:flutter/foundation.dart';
 // import 'package:universal_io/io.dart'; // instead of 'dart:io';
 import 'dart:convert';
 
-import 'package:r_get_ip/r_get_ip.dart';
+// import 'package:r_get_ip/r_get_ip.dart';
+// import 'package:get_ip_address/get_ip_address.dart';
+import 'package:public_ip_address/public_ip_address.dart';
 
 /// Plausible class. Use the constructor to set the parameters.
 class GlobalAnalytics {
@@ -44,8 +46,10 @@ class GlobalAnalytics {
     }
 
     try {
-      String? external = await RGetIp.externalIP;
-      String? network = await RGetIp.networkType;
+
+
+      // String? external = data;
+      String? network = await IpAddress().getIp();
 
       HttpClient client = HttpClient();
       HttpClientRequest request =
@@ -54,7 +58,7 @@ class GlobalAnalytics {
       request.headers.set('User-Agent', userAgent);
       request.headers.set('User-ID', userID);
       request.headers.set('Session-ID', sessionID);
-      request.headers.set('User-IP', '$external,$network');
+      request.headers.set('User-IP', '$network');
       request.headers.set('User-Branch', userBranch);
       request.headers.set('User-Location', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -105,8 +109,7 @@ class GlobalAnalytics {
 
     // Http Post request see https://plausible.io/docs/events-api
     try {
-      String? external = await RGetIp.externalIP;
-      String? network = await RGetIp.networkType;
+     String? network = await IpAddress().getIp();
 
       HttpClient client = HttpClient();
       HttpClientRequest request =
@@ -115,7 +118,7 @@ class GlobalAnalytics {
       request.headers.set('User-Agent', userAgent);
       request.headers.set('User-ID', userID);
       request.headers.set('Session-ID', sessionID);
-      request.headers.set('User-IP', '$external,$network');
+      request.headers.set('User-IP', '$network');
       request.headers.set('User-Branch', userBranch);
       request.headers.set('User-Location', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -160,8 +163,7 @@ class GlobalAnalytics {
     }
 
     try {
-      String? external = await RGetIp.externalIP;
-      String? network = await RGetIp.networkType;
+      String? network = await IpAddress().getIp();
 
       HttpClient client = HttpClient();
       HttpClientRequest request =
@@ -170,7 +172,7 @@ class GlobalAnalytics {
       request.headers.set('User-Agent', userAgent);
       request.headers.set('User-ID', userID);
       request.headers.set('Session-ID', sessionID);
-      request.headers.set('User-IP', '$external,$network');
+      request.headers.set('User-IP', '$network');
       request.headers.set('User-Branch', userBranch);
       request.headers.set('User-Location', userLatLong);
       request.headers.set('Content-Type', 'application/json; charset=utf-8');
